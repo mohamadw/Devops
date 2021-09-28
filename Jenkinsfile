@@ -6,7 +6,7 @@ stages{
 		steps{
 		sh "git clone https://github.com/spring-projects/spring-petclinic"
 
-		sh cd spring-petclinic
+		sh "cd spring-petclinic"
 		}
 
 		script{
