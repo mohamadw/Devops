@@ -10,10 +10,10 @@ stages{
 		
 
 		script{
-			"./mvnw package"
+			sh "./mvnw package"
 		}
-}
-	}
+}	}
+
 }
 }
 
