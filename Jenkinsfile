@@ -2,17 +2,18 @@ pipeline
 {
 agent {label 'slave'};
 stages{
-	stage('Clone and build project'){
+	stage('Clone The Project'){
 		steps{
 		sh "git clone https://github.com/spring-projects/spring-petclinic"
+}}
 
-		sh "cd spring-petclinic"
-		
-
-		script{
+	stage('Build The Project'){
+	steps{
 			sh "./mvnw package"
-		}
-}	}
+	}
+	}
+
+
 
 }
 }
