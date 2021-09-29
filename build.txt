@@ -1,0 +1,22 @@
+pipeline
+{
+agent {label 'builder'};
+stages{
+	stage('Clone The Project'){
+		steps{
+                git 'https://github.com/jleetutorial/maven-project.git'
+                }
+	    }
+
+	stage('Build The Project'){
+	    steps{
+			sh "mvn package"
+	        }
+	    }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: '**/*.war', onlyIfSuccessful: true
+        }
+    }
+}
