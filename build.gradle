@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'org.example'
@@ -16,9 +17,17 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.14.3'
 
     implementation 'org.w3c:dom:2.3.0-jaxb-1.0.6'
+}
+
+application { // ./gradlew run will work now
+    mainClass = 'Main'
+}
 
 
-
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
 }
 
 test {

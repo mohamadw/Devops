@@ -42,7 +42,7 @@ public class Main {
             System.out.println("============================");
             create_file();
             for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node node = nList.item(temp);
+                Node node = nList.item(temp) ;
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     //Print each item's detail
                     Element eElement = (Element) node;
