@@ -1,0 +1,52 @@
+pipeline
+{
+
+agent {label 'slave'};
+stages{
+	stage('Clone The Project'){
+		steps{
+        git branch: 'assignment4', url: 'https://github.com/mohamadw/fursa'
+         }
+	    }
+
+	 stage('cLEAN the Project'){// to be sure, theres no jar file or html file.
+		steps{
+          sh '''
+           gradle clean
+
+           '''
+         }
+	    }
+	stage('Build the Project'){
+		steps{
+          sh '''
+           gradle build
+
+           '''
+         }
+	    }
+
+	    	stage('Run the App'){// will create a jar file in build/libs
+		steps{
+            sh '''
+            cd build/libs
+            java -jar  assignment4-fursa-1.0-SNAPSHOT.jar
+            '''
+         }
+	    }
+
+
+	  stage('Sending a Slack Message'){
+		steps{
+        slackSend message: 'Success to create the html file.'
+         }
+	    }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: '**/*.jar', onlyIfSuccessful: true
+        }
+    }
+
+}
