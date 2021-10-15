@@ -14,14 +14,22 @@ def hello_world():
    headers = {
       'Accepts': 'application/json',  # i want a json format from the api
       'X-CMC_PRO_API_KEY': 'Your access key... ^_^'
-   }
+         }
    session = Session()
    session.headers.update(headers)
 
    response = session.get(url, params=parameters)
 
    answer += "the price now is "
-   answer +=str(json.loads(response.text)['data']['1']['quote']['USD']['price'])
+   
+   price_now =json.loads(response.text)['data']['1']['quote']['USD']['price']
+   percent_change_1h = json.loads(response.text)['data']['1']['quote']['USD']['percent_change_1h']
+   percent_change_1h /=6
+   price_before_10_min =price_now*(100 + percent_change_1h)/100
+   
+   answer +=str(price_now) 
+   answer += "Average Price for the last 10 minutes is " + str(price_before_10_min) 
+
    return answer
 if __name__ == '__main__':
    app.run(host="0.0.0.0")
