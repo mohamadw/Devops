@@ -20,21 +20,22 @@ stages{
 
 	stage('Build The image') {
       steps {
-        sh 'docker build -t bitcoin .'
+        sh 'docker build -t mohamadd3/dp-v1:latest .'
       }
     }
     
-    stage('Run The Container') {
-      steps {
-        sh 'docker run -it -d -p 5000:5000 bitcoin'
-      }
-    }
+   
     stage('Login To Dockerhub') {
       steps {
         sh '''echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'''
       }
     }
 
+ stage('PUSH THE IMAGE') {
+      steps {
+        sh 'docker push mohamadd3/dp-v1:latest'
+      }
+    }
  
   }
   post {
