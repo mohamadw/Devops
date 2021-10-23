@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assignment6
+  labels:
+    app: yanivomc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: yanivomc
+  template:
+    metadata:
+      labels:
+        app: yanivomc
+    spec:
+      containers:
+      - name: yanivomc
+        image:  yanivomc/spring-music:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service1
+  namespace: ingress-nginx
+spec:
+  type: ClusterIP 
+  selector:
+    app: yanivomc
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8090 #service port
+      targetPort: 8080 #pod port 
+
+
