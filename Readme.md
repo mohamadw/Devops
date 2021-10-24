@@ -5,4 +5,4 @@
 
 ## How to Run:
     kubectl apply -f deployment.yml
-    minikube service service1 --url
+    access to http://localhost/music
