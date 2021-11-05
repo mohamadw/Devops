@@ -113,7 +113,7 @@ resource "aws_lb_target_group" "my_tg" {
 }
 
 resource "aws_alb_target_group_attachment" "test" {
-  count = length(aws_instance.my_instance) # taken from https://stackoverflow.com/questions/44491994/not-able-to-add-multiple-target-id-inside-targer-group-using-terraform
+  count = length(aws_instance.my_instance)
   target_group_arn = aws_lb_target_group.my_tg.arn
   target_id = aws_instance.my_instance[count.index].id
   port = 80
