@@ -1,6 +1,7 @@
 # AWS Terraform
 
 ##  
+![image](https://github.com/mohamadw/Devops/blob/aws_terraform/image1.png?raw=true)
 - 2 Instances (t2.micro) - with NGINX running on each.
 
 - An Application Load Balancer that forwards the users’ traffic to the servers
